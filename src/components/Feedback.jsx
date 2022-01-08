@@ -1,12 +1,17 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import FeedbackOptions from "./FeedbackOptions";
 import Statistic from "./Statistic";
 import Notification from "./Notification";
 class Feedback extends Component {
   static defaultProps = {
     initialValue: 0,
+    onLeaveFeedback: false,
   };
-  static propTypes = {};
+  static propTypes = {
+    initialValue: PropTypes.number.isRequired,
+    onLeaveFeedback: PropTypes.bool.isRequired,
+  };
   state = {
     good: this.props.initialValue,
     neutral: this.props.initialValue,
@@ -45,6 +50,7 @@ class Feedback extends Component {
       neutral,
       bad
     );
+    this.onLeaveFeedback = total;
     return (
       <div>
         <FeedbackOptions
@@ -52,12 +58,12 @@ class Feedback extends Component {
           onNormal={this.onNormal}
           onBad={this.onBad}
         />
-        {!total && (
+        {!this.onLeaveFeedback && (
           <Notification
             message={"Для просмотра статистики надо нажать на одну из кнопок"}
           />
         )}
-        {total && (
+        {this.onLeaveFeedback && (
           <Statistic
             good={good}
             neutral={neutral}
