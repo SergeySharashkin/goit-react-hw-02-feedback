@@ -1,8 +1,7 @@
-import Feedback from "./components/Feedback";
+import Section from "./components/Section";
 const App = () => (
   <>
-    <h1>Feedback</h1>
-    <Feedback initialValue={0} />
+    <Section tittel="Feedback" />
   </>
 );
 

@@ -1,7 +1,8 @@
-import React from "react";
-import Controls from "./Controls";
+import React, { Component } from "react";
+import FeedbackOptions from "./FeedbackOptions";
 import Statistic from "./Statistic";
-class Feedback extends React.Component {
+import Notification from "./Notification";
+class Feedback extends Component {
   static defaultProps = {
     initialValue: 0,
   };
@@ -11,8 +12,6 @@ class Feedback extends React.Component {
     neutral: this.props.initialValue,
     bad: this.props.initialValue,
   };
-  total = 0;
-  //    positivePercentage = this.positivePercentage;
 
   onGood = () => {
     this.setState((prevState) => ({
@@ -29,31 +28,44 @@ class Feedback extends React.Component {
       bad: prevState.bad + 1,
     }));
   };
-  countTotalFeedback = () => {
-    this.setState((prevState) => {
-      return (this.total =
-        prevState.neutral + prevState.good + prevState.neutral);
-    });
+  countTotalFeedback = (good, norm, bad) => {
+    const total = good + norm + bad;
+    return total;
   };
-  //   countPositiveFeedbackPercentage = () => {
-
-  //   }
+  countPositiveFeedbackPercentage = (good, norm, bad) => {
+    const positive = Math.round((good * 100) / (good + norm + bad));
+    return positive;
+  };
 
   render() {
+    const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback(good, neutral, bad);
+    const positivePercentage = this.countPositiveFeedbackPercentage(
+      good,
+      neutral,
+      bad
+    );
     return (
       <div>
-        <Controls
+        <FeedbackOptions
           onGood={this.onGood}
           onNormal={this.onNormal}
           onBad={this.onBad}
-          countTotalFeedback={this.countTotalFeedback}
         />
-        <Statistic
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.total}
-        />
+        {!total && (
+          <Notification
+            message={"Для просмотра статистики надо нажать на одну из кнопок"}
+          />
+        )}
+        {total && (
+          <Statistic
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={positivePercentage}
+          />
+        )}
       </div>
     );
   }

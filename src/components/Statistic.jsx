@@ -1,5 +1,5 @@
 import React from "react";
-const Statistic = ({ good, neutral, bad, total }) => (
+const Statistic = ({ good, neutral, bad, total, positivePercentage }) => (
   <div>
     <h2>Статистика</h2>
     <p>
@@ -13,6 +13,9 @@ const Statistic = ({ good, neutral, bad, total }) => (
     </p>
     <p>
       Общее число <span>{total}</span>
+    </p>
+    <p>
+      Процент хороших отзывов <span>{positivePercentage}%</span>
     </p>
   </div>
 );

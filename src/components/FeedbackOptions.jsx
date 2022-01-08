@@ -1,5 +1,5 @@
 import React from "react";
-const Controls = ({ onGood, onNormal, onBad, countTotalFeedback }) => (
+const FeedbackOptions = ({ onGood, onNormal, onBad }) => (
   <div>
     <h2>Пожалуйста оставьте обратную связь</h2>
     <button type="button" onClick={onGood}>
@@ -13,4 +13,4 @@ const Controls = ({ onGood, onNormal, onBad, countTotalFeedback }) => (
     </button>
   </div>
 );
-export default Controls;
+export default FeedbackOptions;
