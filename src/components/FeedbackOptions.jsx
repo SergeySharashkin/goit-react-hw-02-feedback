@@ -1,13 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { OptionsContain, OptionsBtn } from "./feedbakOptions.styled";
 const FeedbackOptions = ({ options, onLeaveFeedback }) => (
-  <div>
+  <OptionsContain>
     {options.map(({ text, name }) => (
-      <button key={name} type="button" name={name} onClick={onLeaveFeedback}>
+      <OptionsBtn
+        key={name}
+        type="button"
+        name={name}
+        onClick={onLeaveFeedback}
+      >
         {text}
-      </button>
+      </OptionsBtn>
     ))}
-  </div>
+  </OptionsContain>
 );
 export default FeedbackOptions;
 FeedbackOptions.propTypes = {
