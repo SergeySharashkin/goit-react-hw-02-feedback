@@ -1,13 +1,12 @@
-import Feedback from "./Feedback";
 import PropTypes from "prop-types";
-export default function Section({ tittel }) {
+export default function Section({ title, children }) {
   return (
-    <>
-      <h1>{tittel}</h1>
-      <Feedback initialValue={0} onLeaveFeedback={false} />
-    </>
+    <section>
+      <h2>{title}</h2>
+      {children}
+    </section>
   );
 }
 Section.propTypes = {
-  tittel: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };

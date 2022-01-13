@@ -41,8 +41,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.6.0",
-    "husky": "^7.0.4",
     "lint-staged": "^12.1.5",
     "prettier": "^2.5.1",
     "prop-types": "^15.8.1"

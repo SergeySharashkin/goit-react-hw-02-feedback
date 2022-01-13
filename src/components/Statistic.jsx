@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const Statistic = ({ good, neutral, bad, total, positivePercentage }) => (
   <div>
-    <h2>Статистика</h2>
     <p>
       Супер <span>{good}</span>
     </p>
