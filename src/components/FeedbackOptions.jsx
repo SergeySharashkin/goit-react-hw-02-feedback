@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { OptionsContain, OptionsBtn } from "./feedbakOptions.styled";
 const FeedbackOptions = ({ options, onLeaveFeedback }) => (
   <OptionsContain>
-    {options.map(({ text, name }) => (
+    {options.map((option) => (
       <OptionsBtn
-        key={name}
+        key={option}
         type="button"
-        name={name}
+        name={option}
         onClick={onLeaveFeedback}
       >
-        {text}
+        {option}
       </OptionsBtn>
     ))}
   </OptionsContain>
@@ -18,10 +18,5 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => (
 export default FeedbackOptions;
 FeedbackOptions.propTypes = {
   onLeaveFeedback: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    })
-  ),
+  options: PropTypes.arrayOf(PropTypes.string.isRequired),
 };

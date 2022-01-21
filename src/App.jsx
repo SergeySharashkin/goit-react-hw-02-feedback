@@ -1,55 +1,45 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import FeedbackOptions from "./components/FeedbackOptions";
 import Section from "./components/Section";
 import Statistic from "./components/Statistic";
 import Notification from "./components/Notification";
 
 class App extends Component {
-  static defaultProps = {
-    initialValue: 0,
-  };
-  static propTypes = {
-    initialValue: PropTypes.number.isRequired,
-  };
   state = {
-    good: this.props.initialValue,
-    neutral: this.props.initialValue,
-    bad: this.props.initialValue,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
-  options = [
-    { name: "good", text: "Супер" },
-    { name: "neutral", text: "Средне" },
-    { name: "bad", text: "Плохо" },
-  ];
+
   onLeaveFeedback = (event) => {
     const { name } = event.currentTarget;
     this.setState((prevState) => ({
       [name]: prevState[name] + 1,
     }));
   };
-  countTotalFeedback = (good, norm, bad) => {
-    const total = good + norm + bad;
+  countTotalFeedback = () => {
+    const total = this.state.good + this.state.neutral + this.state.bad;
     return total;
   };
-  countPositiveFeedbackPercentage = (good, norm, bad) => {
-    const positive = Math.round((good * 100) / (good + norm + bad));
+  countPositiveFeedbackPercentage = () => {
+    const positive = Math.round(
+      (this.state.good * 100) /
+        (this.state.good + this.state.neutral + this.state.bad)
+    );
     return positive;
   };
   render() {
     const { good, neutral, bad } = this.state;
-    const total = this.countTotalFeedback(good, neutral, bad);
-    const positivePercentage = this.countPositiveFeedbackPercentage(
-      good,
-      neutral,
-      bad
-    );
-    // this.onLeaveFeedback = total;
+    const state = this.state;
+    const total = this.countTotalFeedback();
+    const positivePercentage = this.countPositiveFeedbackPercentage();
+
     return (
       <>
         <Section title={"Пожалуйста оставьте обратную связь"}>
           <FeedbackOptions
-            options={this.options}
+            options={Object.keys(state)}
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
